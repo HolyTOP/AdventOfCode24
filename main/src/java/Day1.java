@@ -6,11 +6,7 @@ import java.util.Scanner;
 
 public class Day1 {
 
-    public static void main(String[] args) throws FileNotFoundException {
-        System.out.println(findDifference(buildLists(new File("C:\\Users\\yusuf\\IdeaProjects\\AdventOfCode24\\main\\src\\java\\input.txt"))));
-    }
-
-    public static List[] buildLists(File input) throws FileNotFoundException {
+    public static List<Integer>[] buildLists(File input) throws FileNotFoundException {
         Scanner scanner = new Scanner(input);
         List<Integer> list1 = new ArrayList<>();
         List<Integer> list2 = new ArrayList<>();
@@ -37,5 +33,22 @@ public class Day1 {
             totalDifference += Math.abs(list1.get(i) - list2.get(i));
         }
         return totalDifference;
+    }
+
+    public static int calculateSimilarityScore(List<Integer>[] lists) {
+        int similarityScore = 0;
+        List<Integer> list1 = lists[0];
+        List<Integer> list2 = lists[1];
+
+        for (int value1 : list1) {
+            int count = 0;
+            for (int value2 : list2) {
+                if (value1 == value2) {
+                    count++;
+                }
+            }
+            similarityScore += value1 * count;
+        }
+        return similarityScore;
     }
 }
